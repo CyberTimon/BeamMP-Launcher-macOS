@@ -144,29 +144,7 @@ void CustomPort(int argc, char* argv[]){
 }
 
 void LinuxPatch(){
-    HKEY hKey = nullptr;
-    LONG result = RegOpenKeyEx(HKEY_CURRENT_USER, R"(Software\Wine)", 0, KEY_READ, &hKey);
-    if (result != ERROR_SUCCESS || getenv("USER") == nullptr)return;
-    RegCloseKey(hKey);
-    info("Wine/Proton Detected! If you are on windows delete HKEY_CURRENT_USER\\Software\\Wine in regedit");
-    info("Applying patches...");
-
-    result = RegCreateKey(HKEY_CURRENT_USER, R"(Software\Valve\Steam\Apps\284160)", &hKey);
-
-    if (result != ERROR_SUCCESS){
-        fatal(R"(failed to create HKEY_CURRENT_USER\Software\Valve\Steam\Apps\284160)");
-        return;
-    }
-
-    result = RegSetValueEx(hKey, "Name", 0, REG_SZ, (BYTE*)"BeamNG.drive", 12);
-
-    if (result != ERROR_SUCCESS){
-        fatal(R"(failed to create the value "Name" under HKEY_CURRENT_USER\Software\Valve\Steam\Apps\284160)");
-        return;
-    }
-    RegCloseKey(hKey);
-
-    info("Patched!");
+    info("macOS patch not needed!");
 }
 
 void InitLauncher(int argc, char* argv[]) {
